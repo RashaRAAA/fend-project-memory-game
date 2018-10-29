@@ -17,6 +17,7 @@
  var ndChildClass;
 
  function flip(){
+
    //check if the card clicked before and prevent it to be clicked twice.
    if (! this.classList.contains('disabled')){
      //open the card.
@@ -47,11 +48,25 @@
       nd.remove("disabled");
     },500);
      count=0
- //check if the two opend card are matched
+     //check if the two opend card are matched
      if (stChildClass===ndChildClass){
-       st.toggle("match");
-       nd.toggle("match");
-       }
+         st.toggle("match");
+         nd.toggle("match");
+
+         restart++;
+        // chech the numbers of matched cards to know if the user
+        // complete the game or not.
+        if (restart==8){
+          restart=0;
+
+          //  window appers to tell the user that he won the game.
+          // then restart the game.
+          setTimeout(function(){
+            alert('you won!');
+          },500);
+        }
+
+      }
 
      }
    }
