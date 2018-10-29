@@ -38,14 +38,14 @@
      nd=this.classList;
      ndChildClass=this.firstElementChild.classList[1];
 
-
+    setTimeout(function(){
       st.remove("show");
       st.remove("open");
       st.remove("disabled");
       nd.remove("open");
       nd.remove("show");
       nd.remove("disabled");
-
+    },500);
      count=0
  //check if the two opend card are matched
      if (stChildClass===ndChildClass){
