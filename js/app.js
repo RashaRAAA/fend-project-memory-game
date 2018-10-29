@@ -10,7 +10,50 @@
    iCards[i] = cards[i].firstElementChild.className;
  }
 
+ var count=0
+ var st;
+ var nd;
+ var stChildClass;
+ var ndChildClass;
+
+ function flip(){
+   //check if the card clicked before and prevent it to be clicked twice.
+   if (! this.classList.contains('disabled')){
+     //open the card.
+     this.classList.add("show");
+     this.classList.add("open");
+     this.classList.add("disabled");
+     count++;
+   }
+   // store the first clicked card (the classList of li and i)
+   if (count==1){
+     st=this.classList;
+     stChildClass=this.firstElementChild.classList[1];
+
+   }
+   // store the second clicked card
+
+   if (count==2){
+
+     nd=this.classList;
+     ndChildClass=this.firstElementChild.classList[1];
+
+
+      st.remove("show");
+      st.remove("open");
+      st.remove("disabled");
+      nd.remove("open");
+      nd.remove("show");
+      nd.remove("disabled");
+
+     count=0
+ 
+     }
+   }
+
+
 /*
+
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
