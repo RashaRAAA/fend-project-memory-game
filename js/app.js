@@ -1,7 +1,14 @@
 /*
  * Create a list that holds all of your cards
  */
+ var cards = document.getElementsByClassName('card');
+ var iCards = [];
 
+// function to listen to the card click
+ for (let i=0; i<cards.length; i++){
+   cards[i].addEventListener('click',flip);
+   iCards[i] = cards[i].firstElementChild.className;
+ }
 
 /*
  * Display the cards on the page
