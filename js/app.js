@@ -47,7 +47,12 @@
       nd.remove("disabled");
 
      count=0
- 
+ //check if the two opend card are matched
+     if (stChildClass===ndChildClass){
+       st.toggle("match");
+       nd.toggle("match");
+       }
+
      }
    }
 
