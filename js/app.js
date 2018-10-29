@@ -56,6 +56,18 @@
      }
    }
 
+   function restarFun(){
+     iCards= shuffle(iCards);
+
+     for(i=0;i<cards.length;i++){
+       cards[i].classList.remove('match','show','open','disabled');
+       cards[i].firstElementChild.classList = iCards[i];
+            }
+   }
+
+   const restar = document.querySelector('.fa-repeat');
+   restar.addEventListener('click',restarFun);
+
 
 /*
 
