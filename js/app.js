@@ -15,9 +15,9 @@
  var nd;
  var stChildClass;
  var ndChildClass;
+ var restart=0;
 
  function flip(){
-
    //check if the card clicked before and prevent it to be clicked twice.
    if (! this.classList.contains('disabled')){
      //open the card.
@@ -32,46 +32,47 @@
      stChildClass=this.firstElementChild.classList[1];
 
    }
-   // store the second clicked card
 
+   // store the second clicked card
    if (count==2){
 
-     nd=this.classList;
-     ndChildClass=this.firstElementChild.classList[1];
+      nd=this.classList;
+      ndChildClass=this.firstElementChild.classList[1];
 
-    setTimeout(function(){
-      st.remove("show");
-      st.remove("open");
-      st.remove("disabled");
-      nd.remove("open");
-      nd.remove("show");
-      nd.remove("disabled");
-    },500);
-     count=0
-     //check if the two opend card are matched
-     if (stChildClass===ndChildClass){
-         st.toggle("match");
-         nd.toggle("match");
+      setTimeout(function(){
+        st.remove("show");
+        st.remove("open");
+        st.remove("disabled");
+        nd.remove("open");
+        nd.remove("show");
+        nd.remove("disabled");
+      },500);
+      count=0
 
-         restart++;
-        // chech the numbers of matched cards to know if the user
-        // complete the game or not.
-        if (restart==8){
-          restart=0;
+      //check if the two opend card are matched
+       if (stChildClass===ndChildClass){
+           st.toggle("match");
+           nd.toggle("match");
+           restart++;
 
-          //  window appers to tell the user that he won the game.
-          // then restart the game.
-          setTimeout(function(){
-            alert('you won!');
-          },500);
-        }
+          // chech the numbers of matched cards to know if the user
+          // complete the game or not.
+          if (restart==8){
+            restart=0;
 
+            //  window appers to tell the user that he won the game.
+            // then restart the game.
+            setTimeout(function(){
+              alert('you won!');
+              restarFun();
+            },500);
+          }
       }
-
      }
    }
 
    function restarFun(){
+     restart=0;
      iCards= shuffle(iCards);
 
      for(i=0;i<cards.length;i++){
