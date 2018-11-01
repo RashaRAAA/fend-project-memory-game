@@ -1,85 +1,93 @@
 /*
  * Create a list that holds all of your cards
  */
- var cards = document.getElementsByClassName('card');
- var iCards = [];
+var cards = document.getElementsByClassName('card');
+var iCards = [];
+var nmbrOfMoves =document.querySelector('.moves').textContent;
 
 // function to listen to the card click
- for (let i=0; i<cards.length; i++){
-   cards[i].addEventListener('click',flip);
-   iCards[i] = cards[i].firstElementChild.className;
+for (let i=0; i<cards.length; i++){
+ cards[i].addEventListener('click',flip);
+ iCards[i] = cards[i].firstElementChild.className;
+}
+
+var movs=0;
+var count=0
+var st;
+var nd;
+var stChildClass;
+var ndChildClass;
+var restart=0;
+
+function flip(){
+ //check if the card clicked before and prevent it to be clicked twice.
+ if (! this.classList.contains('disabled')){
+   //open the card.
+   this.classList.add("show");
+   this.classList.add("open");
+   this.classList.add("disabled");
+   count++;
+   movs++;
+ }
+ // store the first clicked card (the classList of li and i)
+ if (count==1){
+   st=this.classList;
+   stChildClass=this.firstElementChild.classList[1];
+
  }
 
- var count=0
- var st;
- var nd;
- var stChildClass;
- var ndChildClass;
- var restart=0;
+ // store the second clicked card
+ if (count==2){
 
- function flip(){
-   //check if the card clicked before and prevent it to be clicked twice.
-   if (! this.classList.contains('disabled')){
-     //open the card.
-     this.classList.add("show");
-     this.classList.add("open");
-     this.classList.add("disabled");
-     count++;
+    nd=this.classList;
+    ndChildClass=this.firstElementChild.classList[1];
+
+    setTimeout(function(){
+      st.remove("show");
+      st.remove("open");
+      st.remove("disabled");
+      nd.remove("open");
+      nd.remove("show");
+      nd.remove("disabled");
+    },500);
+    count=0
+
+    //check if the two opend card are matched
+     if (stChildClass===ndChildClass){
+         st.toggle("match");
+         nd.toggle("match");
+         restart++;
+
+        // chech the numbers of matched cards to know if the user
+        // complete the game or not.
+        if (restart==8){
+          restart=0;
+
+          //  window appers to tell the user that he won the game.
+          // then restart the game.
+          setTimeout(function(){
+            alert('you won!');
+            restarFun();
+          },500);
+        }
+    }
    }
-   // store the first clicked card (the classList of li and i)
-   if (count==1){
-     st=this.classList;
-     stChildClass=this.firstElementChild.classList[1];
+   document.querySelector('.moves').innerHTML = movs;
+//count the number of moves to decrease the number of stars.
+    //}
+ }
 
-   }
+function restarFun(){
+ restart=0;
+ movs=0;
+ document.querySelector('.moves').innerHTML = movs;
+ iCards= shuffle(iCards);
 
-   // store the second clicked card
-   if (count==2){
-
-      nd=this.classList;
-      ndChildClass=this.firstElementChild.classList[1];
-
-      setTimeout(function(){
-        st.remove("show");
-        st.remove("open");
-        st.remove("disabled");
-        nd.remove("open");
-        nd.remove("show");
-        nd.remove("disabled");
-      },500);
-      count=0
-
-      //check if the two opend card are matched
-       if (stChildClass===ndChildClass){
-           st.toggle("match");
-           nd.toggle("match");
-           restart++;
-
-          // chech the numbers of matched cards to know if the user
-          // complete the game or not.
-          if (restart==8){
-            restart=0;
-
-            //  window appers to tell the user that he won the game.
-            // then restart the game.
-            setTimeout(function(){
-              alert('you won!');
-              restarFun();
-            },500);
-          }
-      }
+ for(i=0;i<cards.length;i++){
+   cards[i].classList.remove('match','show','open','disabled');
+   cards[i].firstElementChild.classList = iCards[i];
      }
-   }
-
-   function restarFun(){
-     restart=0;
-     iCards= shuffle(iCards);
-
-     for(i=0;i<cards.length;i++){
-       cards[i].classList.remove('match','show','open','disabled');
-       cards[i].firstElementChild.classList = iCards[i];
-            }
-   }
+}
 
    const restar = document.querySelector('.fa-repeat');
    restar.addEventListener('click',restarFun);
