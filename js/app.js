@@ -3,7 +3,9 @@
  */
 var cards = document.getElementsByClassName('card');
 var iCards = [];
-var nmbrOfMoves =document.querySelector('.moves').textContent;
+var nmbrOfMoves = document.querySelector('.moves').textContent;
+var star3 = document.getElementById('star3');
+var star2 = document.getElementById('star2');
 
 // function to listen to the card click
 for (let i=0; i<cards.length; i++){
@@ -74,7 +76,12 @@ function flip(){
    }
    document.querySelector('.moves').innerHTML = movs;
 //count the number of moves to decrease the number of stars.
-    //}
+    if (movs==20){
+      star3.classList.add("nfa-star");
+    }
+    if (movs==35){
+      star2.classList.add("nfa-star");
+    }
  }
 
 function restarFun(){
@@ -86,7 +93,9 @@ function restarFun(){
  for(i=0;i<cards.length;i++){
    cards[i].classList.remove('match','show','open','disabled');
    cards[i].firstElementChild.classList = iCards[i];
-     }
+   star3.classList.remove("nfa-star");
+   star2.classList.remove("nfa-star");
+  }
 }
 
    const restar = document.querySelector('.fa-repeat');

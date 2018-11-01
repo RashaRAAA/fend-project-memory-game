@@ -81,6 +81,16 @@ h1 {
     font-size: 33px;
 }
 
+.fa-star {
+  color: #000000;
+  background-color: #FFD700;
+}
+
+.nfa-star{
+  color: #ffffff;
+  background-color: #FFD700;
+}
+
 /*
  * Styles for the Score Panel
  */
