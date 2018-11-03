@@ -90,8 +90,11 @@ function flip(){
  }
 
 function restarFun(){
- restart=0;
- movs=0;
+ restart = 0;
+ movs = 0;
+ time = 0;
+ clock.innerHTML = "0:00";
+ isFirstClick = true;
  document.querySelector('.moves').innerHTML = movs;
  iCards= shuffle(iCards);
 
