@@ -94,7 +94,7 @@ function restarFun(){
  movs = 0;
  time = 0;
  clock.innerHTML = "0:00";
- isFirstClick = true;
+ stopClock();
  document.querySelector('.moves').innerHTML = movs;
  iCards= shuffle(iCards);
 
@@ -118,6 +118,11 @@ function startClock() {
    displayTime();
    console.log(time);
  },1000);
+}
+
+function stopClock() {
+ clearInterval(clockId);
+ isFirstClick = true;
 }
 
 let clock;
