@@ -20,8 +20,13 @@ var nd;
 var stChildClass;
 var ndChildClass;
 var restart=0;
+var isFirstClick = true;
 
 function flip(){
+  if (isFirstClick){
+    isFirstClick = false;
+    startClock();
+  }
  //check if the card clicked before and prevent it to be clicked twice.
  if (! this.classList.contains('disabled')){
    //open the card.
@@ -101,9 +106,32 @@ function restarFun(){
    const restar = document.querySelector('.fa-repeat');
    restar.addEventListener('click',restarFun);
 
+let time = 0;
+let clockId;
+
+function startClock() {
+   clockId = setInterval(() =>{
+   time++;
+   displayTime();
+   console.log(time);
+ },1000);
+}
+
+let clock;
+function displayTime() {
+ clock = document.querySelector('.clock');
+ const minutes = Math.floor(time / 60);
+ const seconds = time % 60;
+ if (seconds < 10) {
+   clock.innerHTML = minutes + ":0" + seconds;
+ }
+ else {
+   clock.innerHTML = minutes + ":" + seconds;
+ }
+}
+
 
 /*
-
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
